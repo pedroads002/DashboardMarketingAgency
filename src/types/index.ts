@@ -54,3 +54,36 @@ export interface DashboardData {
   followerMetrics: FollowerMetrics;
   clientAcquisition: ClientAcquisition;
 }
+
+// Novos tipos para o sistema Herval Mkt
+export interface Campanha {
+  id: string;
+  cliente: string;
+  canal: string;
+  objetivo: string;
+  status: string;
+  ultimaAlteracao: string;
+  resultadoPrincipal: string;
+  linkCampanha: string;
+}
+
+export interface Resultado {
+  id: string;
+  cliente: string;
+  data: string;
+  kpiPrincipal: string;
+  variacao: string;
+  destaques: string[];
+  comentario: string;
+}
+
+export interface Lead {
+  id: string;
+  nome: string;
+  telefone: string;
+  cliente: string;
+  campanhaOrigem: string;
+  dataEntrada: string;
+  status: string;
+  tagExtra: string;
+}
