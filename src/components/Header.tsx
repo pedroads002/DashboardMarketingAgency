@@ -1,17 +1,25 @@
 import React from 'react';
-import { TrendingUp, Calendar, User } from 'lucide-react';
+import { TrendingUp, Calendar, LogOut } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 interface HeaderProps {
   clientName?: string;
+  clienteSelector?: React.ReactNode;
 }
 
-export const Header: React.FC<HeaderProps> = ({ clientName = "João Silva" }) => {
+export const Header: React.FC<HeaderProps> = ({ clientName, clienteSelector }) => {
+  const { signOut } = useAuth();
+  
   const currentDate = new Date().toLocaleDateString('pt-BR', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 py-4 sm:py-6">
@@ -40,16 +48,17 @@ export const Header: React.FC<HeaderProps> = ({ clientName = "João Silva" }) =>
             </span>
           </div>
           
-          {/* Nome do Cliente */}
-          <div className="flex items-center space-x-2 bg-blue-50 px-3 py-2 rounded-lg border border-blue-200">
-            <div className="p-1 bg-blue-100 rounded-full">
-              <User className="w-4 h-4 text-blue-600" />
-            </div>
-            <div className="text-sm">
-              <span className="text-gray-500 text-xs">Cliente:</span>
-              <p className="font-semibold text-gray-900">{clientName}</p>
-            </div>
-          </div>
+          {/* Cliente Selector */}
+          {clienteSelector}
+          
+          {/* Logout Button */}
+          <button
+            onClick={handleSignOut}
+            className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <LogOut className="w-4 h-4" />
+            <span className="text-sm">Sair</span>
+          </button>
         </div>
       </div>
     </header>
