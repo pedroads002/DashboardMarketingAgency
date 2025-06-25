@@ -31,27 +31,28 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header clientName="João Silva" />
       
-      <div className="px-6 py-8">
+      <div className="px-4 sm:px-6 py-6 sm:py-8">
         {/* Navigation Tabs */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
+            <nav className="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                    className={`flex items-center space-x-2 py-3 sm:py-4 px-1 border-b-2 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
                       activeTab === tab.id
                         ? 'border-blue-500 text-blue-600'
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
-                    <Icon className="w-5 h-5" />
-                    <span>{tab.label}</span>
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="hidden sm:inline">{tab.label}</span>
+                    <span className="sm:hidden">{tab.label.split(' ')[1]}</span>
                   </button>
                 );
               })}
